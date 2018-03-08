@@ -1,0 +1,19 @@
+{
+  "name": "tsnake",
+  "version": "1.0.0",
+  "description": "A TypeScript implementation of the classic game \"Snake\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aguecida/TSnake.git"
+  },
+  "author": "Daniele Agueci",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aguecida/TSnake/issues"
+  },
+  "homepage": "https://github.com/aguecida/TSnake#readme"
+}
