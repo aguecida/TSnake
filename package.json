@@ -18,5 +18,8 @@
   "homepage": "https://github.com/aguecida/TSnake#readme",
   "dependencies": {
     "typescript": "^2.7.2"
+  },
+  "devDependencies": {
+    "lite-server": "^2.3.0"
   }
 }
