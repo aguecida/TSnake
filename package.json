@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/aguecida/TSnake/issues"
   },
-  "homepage": "https://github.com/aguecida/TSnake#readme"
+  "homepage": "https://github.com/aguecida/TSnake#readme",
+  "dependencies": {
+    "typescript": "^2.7.2"
+  }
 }
