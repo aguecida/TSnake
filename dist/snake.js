@@ -1,7 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var drawer_1 = require("./drawer");
 var Snake = /** @class */ (function () {
     function Snake() {
+        this.color = '#6fda6f';
+        this.initialLength = 3;
+        this.blockSize = 10;
+        this.coordinates = [];
+        this.startingHead = { x: 600 / 2, y: 400 / 2 };
     }
     Object.defineProperty(Snake, "Instance", {
         get: function () {
@@ -10,7 +16,7 @@ var Snake = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Snake.Create = function (context) {
+    Snake.prototype.Create = function (context) {
         this.coordinates = [];
         for (var i = 0; i < this.initialLength; i++) {
             this.coordinates.push({ x: this.startingHead.x, y: this.startingHead.y + i * this.blockSize });
@@ -18,28 +24,12 @@ var Snake = /** @class */ (function () {
             context.fillRect(this.startingHead.x, this.startingHead.y + i * this.blockSize, this.blockSize, this.blockSize);
         }
     };
-    Snake.Draw = function (context) {
-        // this.coordinates.forEach(coordinate => {
-        // });
-        // for (let i = 0; i < this.coordinates.length; i++) {
-        //     context.fillStyle = this.color;
-        //     context.fillRect(this.head.x * i, this.head.y * i, this.blockSize * i, this.blockSize * i);
-        // }
-    };
-    Snake.Move = function (context) {
+    Snake.prototype.Move = function (context) {
         var tail = this.coordinates.pop();
-        context.fillStyle = '#555';
-        context.fillRect(tail.x, tail.y, this.blockSize, this.blockSize);
         this.coordinates.unshift({ x: this.coordinates[0].x, y: this.coordinates[0].y - this.blockSize });
-        context.fillStyle = this.color;
-        context.fillRect(this.coordinates[0].x, this.coordinates[0].y, this.blockSize, this.blockSize);
+        drawer_1.Drawer.DrawSquare(tail, Constants.canvasColor);
+        drawer_1.Drawer.DrawSquare(this.coordinates[0], this.color);
     };
-    Snake.color = '#6fda6f';
-    Snake.size = 3;
-    Snake.initialLength = 3;
-    Snake.blockSize = 10;
-    Snake.coordinates = [];
-    Snake.startingHead = { x: 600 / 2, y: 400 / 2 };
     return Snake;
 }());
 exports.Snake = Snake;

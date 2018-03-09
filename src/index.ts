@@ -1,18 +1,19 @@
 import { Snake } from './snake';
 import { Food } from './food';
+import { Drawer } from './drawer';
 
-Snake.Instance;
+let snake = Snake.Instance;
 
 console.log(Constants.fps)
 
 const pit = document.getElementById('snake-pit') as HTMLCanvasElement;
 const context = pit.getContext('2d') as CanvasRenderingContext2D;
 
-Snake.Create(context);
+snake.Create(context);
 
 var food = new Food();
 food.Draw(context);
 
 setInterval(() => {
-    Snake.Move(context);
-}, 100);
+    snake.Move(context);
+}, 70);
