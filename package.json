@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/aguecida/TSnake#readme",
   "dependencies": {
+    "systemjs": "^0.21.0",
     "typescript": "^2.7.2"
   },
   "devDependencies": {

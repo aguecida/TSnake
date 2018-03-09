@@ -1,9 +1,24 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="./index.css" rel="stylesheet" />
+        <script src="node_modules/systemjs/dist/system.js"></script>
         
+        <!-- <script src="./dist/index.js" type="text/javascript"></script> -->
     </head>
     <body>
-        
+        <canvas id="snake-pit" height="400px" width="600px"></canvas>
+
+        <script>
+            SystemJS.config({
+                baseURL: '/dist',
+                packages: {
+                    '/': {
+                        defaultExtensions: 'js'
+                    }
+                }
+            });
+            SystemJS.import('index.js');
+        </script>
     </body>
 </html>
