@@ -4,12 +4,10 @@ var snake_1 = require("./snake");
 var food_1 = require("./food");
 var snake = snake_1.Snake.Instance;
 console.log(Constants.fps);
-var pit = document.getElementById('snake-pit');
-var context = pit.getContext('2d');
-snake.Create(context);
+snake.Create();
 var food = new food_1.Food();
-food.Draw(context);
+food.Create();
 setInterval(function () {
-    snake.Move(context);
+    snake.Move();
 }, 70);
 //# sourceMappingURL=index.js.map

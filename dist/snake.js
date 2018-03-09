@@ -7,7 +7,7 @@ var Snake = /** @class */ (function () {
         this.initialLength = 3;
         this.blockSize = 10;
         this.coordinates = [];
-        this.startingHead = { x: 600 / 2, y: 400 / 2 };
+        this.startingPosition = { x: 600 / 2, y: 400 / 2 };
     }
     Object.defineProperty(Snake, "Instance", {
         get: function () {
@@ -16,15 +16,15 @@ var Snake = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Snake.prototype.Create = function (context) {
+    Snake.prototype.Create = function () {
         this.coordinates = [];
         for (var i = 0; i < this.initialLength; i++) {
-            this.coordinates.push({ x: this.startingHead.x, y: this.startingHead.y + i * this.blockSize });
-            context.fillStyle = this.color;
-            context.fillRect(this.startingHead.x, this.startingHead.y + i * this.blockSize, this.blockSize, this.blockSize);
+            var newElement = { x: this.startingPosition.x, y: this.startingPosition.y + i * this.blockSize };
+            this.coordinates.push(newElement);
+            drawer_1.Drawer.DrawSquare(newElement, this.color);
         }
     };
-    Snake.prototype.Move = function (context) {
+    Snake.prototype.Move = function () {
         var tail = this.coordinates.pop();
         this.coordinates.unshift({ x: this.coordinates[0].x, y: this.coordinates[0].y - this.blockSize });
         drawer_1.Drawer.DrawSquare(tail, Constants.canvasColor);

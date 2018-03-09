@@ -1,11 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var drawer_1 = require("./drawer");
 var Food = /** @class */ (function () {
     function Food() {
+        this.color = '#e85a5a';
     }
-    Food.prototype.Draw = function (context) {
-        context.fillStyle = '#e85a5a';
-        context.fillRect(10, 10, 10, 10);
+    Food.prototype.Create = function () {
+        var coordinates = { x: 10, y: 10 };
+        drawer_1.Drawer.DrawSquare(coordinates, this.color);
     };
     return Food;
 }());

@@ -1,10 +1,11 @@
+import { Drawer } from "./drawer";
+import { Coordinates } from "./types";
+
 export class Food {
-    constructor() {
+    color: string = '#e85a5a';
 
-    }
-
-    Draw(context: CanvasRenderingContext2D): void {
-        context.fillStyle = '#e85a5a';
-	    context.fillRect(10, 10, 10, 10);
+    Create() {
+        let coordinates: Coordinates = { x: 10, y: 10 };
+        Drawer.DrawSquare(coordinates, this.color);
     }
 }

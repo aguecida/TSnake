@@ -6,14 +6,11 @@ let snake = Snake.Instance;
 
 console.log(Constants.fps)
 
-const pit = document.getElementById('snake-pit') as HTMLCanvasElement;
-const context = pit.getContext('2d') as CanvasRenderingContext2D;
-
-snake.Create(context);
+snake.Create();
 
 var food = new Food();
-food.Draw(context);
+food.Create();
 
 setInterval(() => {
-    snake.Move(context);
+    snake.Move();
 }, 70);

@@ -7,7 +7,7 @@ export class Snake {
     private initialLength: number = 3;
     private blockSize: number = 10;
     private coordinates: Array<Coordinates> = [];
-    private startingHead = { x: 600 / 2, y: 400 / 2 };
+    private startingPosition: Coordinates = { x: 600 / 2, y: 400 / 2 };
 
     private constructor() { }
 
@@ -15,16 +15,16 @@ export class Snake {
         return this._instance || (this._instance = new Snake());
     }
 
-    Create(context: CanvasRenderingContext2D): void {
+    Create(): void {
         this.coordinates = [];
         for (let i = 0; i < this.initialLength; i++) {
-            this.coordinates.push({ x: this.startingHead.x, y: this.startingHead.y + i * this.blockSize });
-            context.fillStyle = this.color;
-            context.fillRect(this.startingHead.x, this.startingHead.y + i * this.blockSize, this.blockSize, this.blockSize);
+            let newElement: Coordinates = { x: this.startingPosition.x, y: this.startingPosition.y + i * this.blockSize };
+            this.coordinates.push(newElement);
+            Drawer.DrawSquare(newElement, this.color);
         }
     }
     
-    Move(context: CanvasRenderingContext2D) {
+    Move() {
         let tail = this.coordinates.pop() as Coordinates;
         this.coordinates.unshift({ x: this.coordinates[0].x, y: this.coordinates[0].y - this.blockSize });
         
