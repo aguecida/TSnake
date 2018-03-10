@@ -9,8 +9,12 @@ export function getRandomCoordinates(): Coordinates {
     return { x, y };
 }
 
-export function hasCollision(newElement: Coordinates, existingElements: Array<Coordinates>) {
+export function hasCollision(newElement: Coordinates, existingElements: Array<Coordinates>): boolean {
     return existingElements.some(element => {
         return element.x === newElement.x && element.y === newElement.y;
     });
+}
+
+export function outOfBounds({ x, y }: Coordinates): boolean {
+    return x > Constants.canvasWidth || x < 0 || y > Constants.canvasHeight || y < 0;
 }

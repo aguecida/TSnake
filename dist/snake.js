@@ -15,15 +15,22 @@ var drawer_1 = __importDefault(require("./drawer"));
 var Constants = __importStar(require("./constants"));
 var Snake = /** @class */ (function () {
     function Snake() {
-        this.coordinates = [];
+        this.body = [];
         this.color = '#6fda6f';
         this.initialLength = 3;
         this.startingPosition = { x: Constants.canvasWidth / 2, y: Constants.canvasHeight / 2 };
         this.direction = compass_1.Direction.Up;
     }
-    Object.defineProperty(Snake.prototype, "Coordinates", {
+    Object.defineProperty(Snake.prototype, "Body", {
         get: function () {
-            return this.coordinates;
+            return this.body;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Snake.prototype, "Head", {
+        get: function () {
+            return this.body[0];
         },
         enumerable: true,
         configurable: true
@@ -36,35 +43,35 @@ var Snake = /** @class */ (function () {
         configurable: true
     });
     Snake.prototype.Create = function () {
-        this.coordinates = [];
+        this.body = [];
         for (var i = 0; i < this.initialLength; i++) {
             var newElement = { x: this.startingPosition.x, y: this.startingPosition.y + i * Constants.blockSize };
-            this.coordinates.push(newElement);
+            this.body.push(newElement);
             drawer_1.default.DrawSquare(newElement, this.color);
         }
     };
     Snake.prototype.Move = function () {
-        var tail = this.coordinates.pop();
+        var tail = this.body.pop();
         switch (this.direction) {
             case compass_1.Direction.Up:
-                this.coordinates.unshift({ x: this.coordinates[0].x, y: this.coordinates[0].y - Constants.blockSize });
+                this.body.unshift({ x: this.body[0].x, y: this.body[0].y - Constants.blockSize });
                 break;
             case compass_1.Direction.Down:
-                this.coordinates.unshift({ x: this.coordinates[0].x, y: this.coordinates[0].y + Constants.blockSize });
+                this.body.unshift({ x: this.body[0].x, y: this.body[0].y + Constants.blockSize });
                 break;
             case compass_1.Direction.Left:
-                this.coordinates.unshift({ x: this.coordinates[0].x - Constants.blockSize, y: this.coordinates[0].y });
+                this.body.unshift({ x: this.body[0].x - Constants.blockSize, y: this.body[0].y });
                 break;
             case compass_1.Direction.Right:
-                this.coordinates.unshift({ x: this.coordinates[0].x + Constants.blockSize, y: this.coordinates[0].y });
+                this.body.unshift({ x: this.body[0].x + Constants.blockSize, y: this.body[0].y });
                 break;
         }
         drawer_1.default.DrawSquare(tail, Constants.canvasColor);
-        drawer_1.default.DrawSquare(this.coordinates[0], this.color);
+        drawer_1.default.DrawSquare(this.body[0], this.color);
     };
     Snake.prototype.Grow = function () {
-        var tail = this.coordinates[this.coordinates.length - 1];
-        var prev = this.coordinates[this.coordinates.length - 2];
+        var tail = this.body[this.body.length - 1];
+        var prev = this.body[this.body.length - 2];
         var newTail;
         if (tail.x > prev.x) {
             newTail = { x: tail.x + Constants.blockSize, y: tail.y };
@@ -78,13 +85,21 @@ var Snake = /** @class */ (function () {
         else {
             newTail = { x: tail.x, y: tail.y - Constants.blockSize };
         }
-        this.coordinates.push(newTail);
+        this.body.push(newTail);
         drawer_1.default.DrawSquare(newTail, this.color);
     };
     Snake.prototype.ChangeDirection = function (newDirection) {
         if (compass_1.isOppositeDirection(this.direction, newDirection))
             return;
         this.direction = newDirection;
+    };
+    Snake.prototype.HasCollisionWithSelf = function () {
+        for (var i = 1; i < this.body.length; i++) {
+            if (this.Head.x === this.body[i].x && this.Head.y === this.body[i].y) {
+                return true;
+            }
+        }
+        return false;
     };
     return Snake;
 }());

@@ -9,7 +9,7 @@ export default class Food {
     constructor() {
         this.coordinates = getRandomCoordinates();
 
-        while (hasCollision(this.coordinates, Snake.Instance.Coordinates)) {
+        while (hasCollision(this.coordinates, Snake.Instance.Body)) {
             this.coordinates = getRandomCoordinates();
         }
 

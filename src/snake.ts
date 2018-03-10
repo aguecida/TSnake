@@ -5,7 +5,7 @@ import * as Constants from './constants';
 
 export default class Snake {
     private static _instance: Snake;
-    private coordinates: Array<Coordinates> = [];
+    private body: Array<Coordinates> = [];
     private color: string = '#6fda6f';
     private initialLength: number = 3;
     private startingPosition: Coordinates = { x: Constants.canvasWidth / 2, y: Constants.canvasHeight / 2 };
@@ -13,8 +13,12 @@ export default class Snake {
 
     private constructor() { }
 
-    get Coordinates(): Array<Coordinates> {
-        return this.coordinates;
+    get Body(): Array<Coordinates> {
+        return this.body;
+    }
+
+    get Head(): Coordinates {
+        return this.body[0];
     }
 
     static get Instance(): Snake {
@@ -22,39 +26,39 @@ export default class Snake {
     }
 
     Create(): void {
-        this.coordinates = [];
+        this.body = [];
         for (let i = 0; i < this.initialLength; i++) {
             let newElement: Coordinates = { x: this.startingPosition.x, y: this.startingPosition.y + i * Constants.blockSize };
-            this.coordinates.push(newElement);
+            this.body.push(newElement);
             Drawer.DrawSquare(newElement, this.color);
         }
     }
     
     Move(): void {
-        let tail = this.coordinates.pop() as Coordinates;
+        let tail = this.body.pop() as Coordinates;
 
         switch (this.direction) {
             case Direction.Up:
-                this.coordinates.unshift({ x: this.coordinates[0].x, y: this.coordinates[0].y - Constants.blockSize });
+                this.body.unshift({ x: this.body[0].x, y: this.body[0].y - Constants.blockSize });
                 break;
             case Direction.Down:
-                this.coordinates.unshift({ x: this.coordinates[0].x, y: this.coordinates[0].y + Constants.blockSize });
+                this.body.unshift({ x: this.body[0].x, y: this.body[0].y + Constants.blockSize });
                 break;
             case Direction.Left:
-                this.coordinates.unshift({ x: this.coordinates[0].x - Constants.blockSize, y: this.coordinates[0].y });
+                this.body.unshift({ x: this.body[0].x - Constants.blockSize, y: this.body[0].y });
                 break;
             case Direction.Right:
-                this.coordinates.unshift({ x: this.coordinates[0].x + Constants.blockSize, y: this.coordinates[0].y });
+                this.body.unshift({ x: this.body[0].x + Constants.blockSize, y: this.body[0].y });
                 break;
         }
 
         Drawer.DrawSquare(tail, Constants.canvasColor);
-        Drawer.DrawSquare(this.coordinates[0], this.color);
+        Drawer.DrawSquare(this.body[0], this.color);
     }
 
     Grow(): void {
-        let tail: Coordinates = this.coordinates[this.coordinates.length - 1];
-        let prev: Coordinates = this.coordinates[this.coordinates.length - 2];
+        let tail: Coordinates = this.body[this.body.length - 1];
+        let prev: Coordinates = this.body[this.body.length - 2];
         let newTail: Coordinates;
 
         if (tail.x > prev.x) {
@@ -70,12 +74,21 @@ export default class Snake {
             newTail = { x: tail.x, y: tail.y - Constants.blockSize };
         }
 
-        this.coordinates.push(newTail);
+        this.body.push(newTail);
         Drawer.DrawSquare(newTail, this.color);
     }
 
     ChangeDirection(newDirection: Direction): void {
         if (isOppositeDirection(this.direction, newDirection)) return;
         this.direction = newDirection;
+    }
+
+    HasCollisionWithSelf(): boolean {
+        for (let i = 1; i < this.body.length; i++) {
+            if (this.Head.x === this.body[i].x && this.Head.y === this.body[i].y) {
+                return true;
+            }
+        }
+        return false;
     }
 }

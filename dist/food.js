@@ -10,7 +10,7 @@ var Food = /** @class */ (function () {
     function Food() {
         this.color = '#e85a5a';
         this.coordinates = map_1.getRandomCoordinates();
-        while (map_1.hasCollision(this.coordinates, snake_1.default.Instance.Coordinates)) {
+        while (map_1.hasCollision(this.coordinates, snake_1.default.Instance.Body)) {
             this.coordinates = map_1.getRandomCoordinates();
         }
         drawer_1.default.DrawSquare(this.coordinates, this.color);

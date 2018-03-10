@@ -27,9 +27,13 @@ drawer_1.default.FillCanvas(Constants.canvasColor);
 var snake = snake_1.default.Instance;
 snake.Create();
 var food = new food_1.default();
-setInterval(function () {
+var interval = setInterval(function () {
     snake.Move();
-    if (map_1.hasCollision(food.Coordinates, snake.Coordinates)) {
+    if (map_1.outOfBounds(snake.Head) || snake.HasCollisionWithSelf()) {
+        drawer_1.default.FillCanvas(Constants.canvasColor);
+        clearInterval(interval);
+    }
+    if (map_1.hasCollision(food.Coordinates, snake.Body)) {
         ScoreCard.incrementScore();
         snake.Grow();
         food = new food_1.default();

@@ -1,5 +1,5 @@
 import { Direction } from './compass';
-import { getRandomCoordinates, hasCollision, Coordinates } from './map';
+import { getRandomCoordinates, hasCollision, Coordinates, outOfBounds } from './map';
 import Snake from './snake';
 import Food from './food';
 import Drawer from './drawer';
@@ -24,10 +24,17 @@ snake.Create();
 
 let food = new Food();
 
-setInterval(() => {
+var interval = setInterval(() => {
     snake.Move();
 
-    if (hasCollision(food.Coordinates, snake.Coordinates)) {
+    if (outOfBounds(snake.Head) || snake.HasCollisionWithSelf()) {
+        Drawer.FillCanvas(Constants.canvasColor);
+        clearInterval(interval);
+    }
+
+    
+
+    if (hasCollision(food.Coordinates, snake.Body)) {
         ScoreCard.incrementScore();
         snake.Grow();
         food = new Food();
