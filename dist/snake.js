@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var drawer_1 = require("./drawer");
+var drawer_1 = __importDefault(require("./drawer"));
 var compass_1 = require("./compass");
 var Snake = /** @class */ (function () {
     function Snake() {
@@ -29,7 +32,7 @@ var Snake = /** @class */ (function () {
         for (var i = 0; i < this.initialLength; i++) {
             var newElement = { x: this.startingPosition.x, y: this.startingPosition.y + i * Constants.blockSize };
             this.coordinates.push(newElement);
-            drawer_1.Drawer.DrawSquare(newElement, this.color);
+            drawer_1.default.DrawSquare(newElement, this.color);
         }
     };
     Snake.prototype.Move = function () {
@@ -48,8 +51,8 @@ var Snake = /** @class */ (function () {
                 this.coordinates.unshift({ x: this.coordinates[0].x + Constants.blockSize, y: this.coordinates[0].y });
                 break;
         }
-        drawer_1.Drawer.DrawSquare(tail, Constants.canvasColor);
-        drawer_1.Drawer.DrawSquare(this.coordinates[0], this.color);
+        drawer_1.default.DrawSquare(tail, Constants.canvasColor);
+        drawer_1.default.DrawSquare(this.coordinates[0], this.color);
     };
     Snake.prototype.Grow = function () {
         var tail = this.coordinates[this.coordinates.length - 1];
@@ -68,7 +71,7 @@ var Snake = /** @class */ (function () {
             newTail = { x: tail.x, y: tail.y - Constants.blockSize };
         }
         this.coordinates.push(newTail);
-        drawer_1.Drawer.DrawSquare(newTail, this.color);
+        drawer_1.default.DrawSquare(newTail, this.color);
     };
     Snake.prototype.ChangeDirection = function (newDirection) {
         if (compass_1.isOppositeDirection(this.direction, newDirection))
@@ -77,5 +80,5 @@ var Snake = /** @class */ (function () {
     };
     return Snake;
 }());
-exports.Snake = Snake;
+exports.default = Snake;
 //# sourceMappingURL=snake.js.map

@@ -1,6 +1,6 @@
-import { Snake } from './snake';
-import { Food } from './food';
-import { Drawer } from './drawer';
+import Snake from './snake';
+import Food from './food';
+import Drawer from './drawer';
 import { Direction } from './compass';
 
 

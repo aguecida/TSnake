@@ -1,6 +1,6 @@
 import { Coordinates } from "./types";
 
-export class Drawer {
+export default class Drawer {
     private static canvas: HTMLCanvasElement = document.getElementById('snake-pit') as HTMLCanvasElement;
     private static context: CanvasRenderingContext2D = Drawer.canvas.getContext('2d') as CanvasRenderingContext2D;
 

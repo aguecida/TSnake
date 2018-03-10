@@ -19,5 +19,5 @@ var Drawer = /** @class */ (function () {
     Drawer.context = Drawer.canvas.getContext('2d');
     return Drawer;
 }());
-exports.Drawer = Drawer;
+exports.default = Drawer;
 //# sourceMappingURL=drawer.js.map

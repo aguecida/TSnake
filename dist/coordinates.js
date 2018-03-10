@@ -4,4 +4,4 @@ function getRandomCoordinates() {
     return { x: 10, y: 10 };
 }
 exports.getRandomCoordinates = getRandomCoordinates;
-//# sourceMappingURL=types.js.map
+//# sourceMappingURL=coordinates.js.map

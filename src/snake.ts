@@ -1,8 +1,8 @@
 import { Coordinates } from './types';
-import { Drawer } from './drawer';
+import Drawer from './drawer';
 import { Direction, isOppositeDirection } from './compass';
 
-export class Snake {
+export default class Snake {
     private static _instance: Snake;
     private coordinates: Array<Coordinates> = [];
     private color: string = '#6fda6f';

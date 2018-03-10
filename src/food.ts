@@ -1,7 +1,7 @@
-import { Drawer } from "./drawer";
+import Drawer from "./drawer";
 import { Coordinates } from "./types";
 
-export class Food {
+export default class Food {
     private color: string = '#e85a5a';
     private coordinates: Coordinates;
 
