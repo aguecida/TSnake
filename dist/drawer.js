@@ -3,9 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Drawer = /** @class */ (function () {
     function Drawer() {
     }
-    Drawer.ClearCanvas = function () {
-        Drawer.context.fillStyle = Constants.canvasColor;
-        Drawer.context.fillRect(0, 0, Drawer.canvas.width, Drawer.canvas.height);
+    Drawer.FillCanvas = function (color) {
+        for (var i = 0; i < Constants.canvasHeight; i += Constants.blockSize) {
+            for (var j = 0; j < Constants.canvasWidth; j += Constants.blockSize) {
+                Drawer.DrawSquare({ x: j, y: i }, color);
+            }
+        }
     };
     Drawer.DrawSquare = function (_a, color) {
         var x = _a.x, y = _a.y;

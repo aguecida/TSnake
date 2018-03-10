@@ -4,9 +4,12 @@ export class Drawer {
     private static canvas: HTMLCanvasElement = document.getElementById('snake-pit') as HTMLCanvasElement;
     private static context: CanvasRenderingContext2D = Drawer.canvas.getContext('2d') as CanvasRenderingContext2D;
 
-    static ClearCanvas() {
-        Drawer.context.fillStyle = Constants.canvasColor;
-        Drawer.context.fillRect(0, 0, Drawer.canvas.width, Drawer.canvas.height);
+    static FillCanvas(color: string): void {
+        for (let i = 0; i < Constants.canvasHeight; i += Constants.blockSize) {
+            for (let j = 0; j < Constants.canvasWidth; j += Constants.blockSize) {
+                Drawer.DrawSquare({ x: j, y: i }, color);
+            }
+        }
     }
 
     static DrawSquare({ x, y }: Coordinates, color: string): void {

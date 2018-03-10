@@ -4,7 +4,8 @@ body {
 }
 
 #snake-pit {
-    background-color: #555;
+    /* background-color: #555; */
+    outline: none !important;
     margin: auto;
     position: absolute;
     top: 0;
