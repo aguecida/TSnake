@@ -10,6 +10,7 @@ export default class Snake {
     private initialLength: number = 3;
     private startingPosition: Coordinates = { x: Constants.canvasWidth / 2, y: Constants.canvasHeight / 2 };
     private direction: Direction = Direction.Up;
+    private directionQueue: Array<Direction> = [];
 
     private constructor() { }
 
@@ -27,6 +28,7 @@ export default class Snake {
 
     Create(): void {
         this.body = [];
+        this.direction = Direction.Up;
         for (let i = 0; i < this.initialLength; i++) {
             let newElement: Coordinates = { x: this.startingPosition.x, y: this.startingPosition.y + i * Constants.blockSize };
             this.body.push(newElement);
@@ -37,6 +39,8 @@ export default class Snake {
     Move(): void {
         let tail = this.body.pop() as Coordinates;
 
+        if (this.directionQueue.length > 0) this.direction = this.directionQueue.shift() as Direction;
+        
         switch (this.direction) {
             case Direction.Up:
                 this.body.unshift({ x: this.body[0].x, y: this.body[0].y - Constants.blockSize });
@@ -79,8 +83,9 @@ export default class Snake {
     }
 
     ChangeDirection(newDirection: Direction): void {
-        if (isOppositeDirection(this.direction, newDirection)) return;
-        this.direction = newDirection;
+        const lastDirection = this.directionQueue.length > 0 ? this.directionQueue[this.directionQueue.length - 1] : this.direction;
+        if (isOppositeDirection(lastDirection, newDirection)) return;
+        this.directionQueue.push(newDirection);
     }
 
     HasCollisionWithSelf(): boolean {

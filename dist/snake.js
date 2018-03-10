@@ -20,6 +20,7 @@ var Snake = /** @class */ (function () {
         this.initialLength = 3;
         this.startingPosition = { x: Constants.canvasWidth / 2, y: Constants.canvasHeight / 2 };
         this.direction = compass_1.Direction.Up;
+        this.directionQueue = [];
     }
     Object.defineProperty(Snake.prototype, "Body", {
         get: function () {
@@ -44,6 +45,7 @@ var Snake = /** @class */ (function () {
     });
     Snake.prototype.Create = function () {
         this.body = [];
+        this.direction = compass_1.Direction.Up;
         for (var i = 0; i < this.initialLength; i++) {
             var newElement = { x: this.startingPosition.x, y: this.startingPosition.y + i * Constants.blockSize };
             this.body.push(newElement);
@@ -52,6 +54,8 @@ var Snake = /** @class */ (function () {
     };
     Snake.prototype.Move = function () {
         var tail = this.body.pop();
+        if (this.directionQueue.length > 0)
+            this.direction = this.directionQueue.shift();
         switch (this.direction) {
             case compass_1.Direction.Up:
                 this.body.unshift({ x: this.body[0].x, y: this.body[0].y - Constants.blockSize });
@@ -89,9 +93,10 @@ var Snake = /** @class */ (function () {
         drawer_1.default.DrawSquare(newTail, this.color);
     };
     Snake.prototype.ChangeDirection = function (newDirection) {
-        if (compass_1.isOppositeDirection(this.direction, newDirection))
+        var lastDirection = this.directionQueue.length > 0 ? this.directionQueue[this.directionQueue.length - 1] : this.direction;
+        if (compass_1.isOppositeDirection(lastDirection, newDirection))
             return;
-        this.direction = newDirection;
+        this.directionQueue.push(newDirection);
     };
     Snake.prototype.HasCollisionWithSelf = function () {
         for (var i = 1; i < this.body.length; i++) {

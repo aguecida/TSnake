@@ -8,6 +8,10 @@ import * as ScoreCard from './scorecard';
 
 ScoreCard.newGame();
 
+const snake: Snake = Snake.Instance;
+let food: Food;
+let gameOver = true;
+
 let pit = document.getElementById('snake-pit') as HTMLElement;
 
 const height = new Number(Constants.canvasHeight);
@@ -16,35 +20,15 @@ pit.setAttribute('height', height.toString());
 const width = new Number(Constants.canvasWidth);
 pit.setAttribute('width', width.toString());
 
-Drawer.FillCanvas(Constants.canvasColor);
-
-const snake = Snake.Instance;
-snake.Create();
-
-
-let food = new Food();
-
-var interval = setInterval(() => {
-    snake.Move();
-
-    if (outOfBounds(snake.Head) || snake.HasCollisionWithSelf()) {
-        Drawer.FillCanvas(Constants.canvasColor);
-        clearInterval(interval);
-    }
-
-    
-
-    if (hasCollision(food.Coordinates, snake.Body)) {
-        ScoreCard.incrementScore();
-        snake.Grow();
-        food = new Food();
-    }
-}, 50);
-
 pit.setAttribute('tabindex', '1');
 pit.focus();
 
 pit.onkeydown = (e: KeyboardEvent) => {
+    if (gameOver) {
+        start();
+        return;
+    }
+
     switch(e.keyCode) {
         case Direction.Up:
             snake.ChangeDirection(Direction.Up);
@@ -60,3 +44,28 @@ pit.onkeydown = (e: KeyboardEvent) => {
             break;
     }
 };
+
+Drawer.FillCanvas(Constants.canvasColor);
+
+function start() {
+    gameOver = false;
+    ScoreCard.newGame();
+    snake.Create();
+    food = new Food();
+
+    var interval = setInterval(() => {
+        snake.Move();
+    
+        if (outOfBounds(snake.Head) || snake.HasCollisionWithSelf()) {
+            Drawer.FillCanvas(Constants.canvasColor);
+            clearInterval(interval);
+            gameOver = true;
+        }
+    
+        if (hasCollision(food.Coordinates, snake.Body)) {
+            ScoreCard.incrementScore();
+            snake.Grow();
+            food = new Food();
+        }
+    }, 50);
+}

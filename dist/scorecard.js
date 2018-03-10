@@ -5,25 +5,19 @@ var currentScore = 0;
 var points = 10;
 function newGame() {
     currentScore = 0;
-    printTopScore();
-    printCurrentScore();
+    printScores();
 }
 exports.newGame = newGame;
-function gameOver(score) {
-    if (score > topScore)
-        topScore = score;
-}
-exports.gameOver = gameOver;
 function incrementScore() {
     currentScore += points;
-    printCurrentScore();
+    if (currentScore > topScore)
+        topScore = currentScore;
+    printScores();
 }
 exports.incrementScore = incrementScore;
-function printCurrentScore() {
+function printScores() {
     var currentScoreElement = document.getElementById("current-score");
     currentScoreElement.innerText = "Current Score: " + currentScore;
-}
-function printTopScore() {
     var topScoreElement = document.getElementById("top-score");
     topScoreElement.innerText = "Top Score: " + topScore;
 }
