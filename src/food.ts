@@ -3,10 +3,12 @@ import { Coordinates } from "./types";
 
 export default class Food {
     private color: string = '#e85a5a';
-    private coordinates: Coordinates;
 
-    constructor() {
-        this.coordinates = { x: 10, y: 10 };
+    constructor(private coordinates: Coordinates) {
         Drawer.DrawSquare(this.coordinates, this.color);
+    }
+
+    get Coordinates(): Coordinates {
+        return this.coordinates;
     }
 }

@@ -7,11 +7,13 @@ var snake_1 = __importDefault(require("./snake"));
 var food_1 = __importDefault(require("./food"));
 var drawer_1 = __importDefault(require("./drawer"));
 var compass_1 = require("./compass");
+var types_1 = require("./types");
 var pit = document.getElementById('snake-pit');
 drawer_1.default.FillCanvas(Constants.canvasColor);
 var snake = snake_1.default.Instance;
 snake.Create();
-var food = new food_1.default();
+var coordinates = types_1.getRandomCoordinates();
+var food = new food_1.default(coordinates);
 setInterval(function () {
     snake.Move();
 }, 1000);
