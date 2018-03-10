@@ -16,6 +16,8 @@ var snake_1 = __importDefault(require("./snake"));
 var food_1 = __importDefault(require("./food"));
 var drawer_1 = __importDefault(require("./drawer"));
 var Constants = __importStar(require("./constants"));
+var ScoreCard = __importStar(require("./scorecard"));
+ScoreCard.newGame();
 var pit = document.getElementById('snake-pit');
 var height = new Number(Constants.canvasHeight);
 pit.setAttribute('height', height.toString());
@@ -28,6 +30,7 @@ var food = new food_1.default();
 setInterval(function () {
     snake.Move();
     if (map_1.hasCollision(food.Coordinates, snake.Coordinates)) {
+        ScoreCard.incrementScore();
         snake.Grow();
         food = new food_1.default();
     }

@@ -4,12 +4,19 @@ body {
 }
 
 #snake-pit {
-    /* background-color: #555; */
     outline: none !important;
-    margin: auto;
+    margin: 0 auto;
     position: absolute;
-    top: 0;
-    bottom: 0;
+    top: 40px;
     left: 0;
     right: 0;
+}
+
+#score-board {
+    margin: 10px 0;
+    text-align: center;
+}
+
+#score-board > span {
+    margin: 0 10px;
 }

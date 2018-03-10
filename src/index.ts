@@ -4,6 +4,9 @@ import Snake from './snake';
 import Food from './food';
 import Drawer from './drawer';
 import * as Constants from './constants';
+import * as ScoreCard from './scorecard';
+
+ScoreCard.newGame();
 
 let pit = document.getElementById('snake-pit') as HTMLElement;
 
@@ -25,6 +28,7 @@ setInterval(() => {
     snake.Move();
 
     if (hasCollision(food.Coordinates, snake.Coordinates)) {
+        ScoreCard.incrementScore();
         snake.Grow();
         food = new Food();
     }

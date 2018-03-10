@@ -4,18 +4,22 @@
         <link href="./index.css" rel="stylesheet" />
         <script src="node_modules/systemjs/dist/system.js"></script>
         <script>
-                SystemJS.config({
-                    baseURL: '/dist',
-                    packages: {
-                        '/': {
-                            defaultExtensions: 'js'
-                        }
+            SystemJS.config({
+                baseURL: '/dist',
+                packages: {
+                    '/': {
+                        defaultExtensions: 'js'
                     }
-                });
-                SystemJS.import('index.js');
-            </script>
+                }
+            });
+            SystemJS.import('index.js');
+        </script>
     </head>
     <body>
+        <div id="score-board">
+            <span id="top-score"></span>
+            <span id="current-score" ></span>
+        </div>
         <canvas id="snake-pit"></canvas>
     </body>
 </html>
