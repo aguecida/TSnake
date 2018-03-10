@@ -2,7 +2,7 @@ import Snake from './snake';
 import Food from './food';
 import Drawer from './drawer';
 import { Direction } from './compass';
-import { getRandomCoordinates, Coordinates } from './types';
+import { getRandomCoordinates, hasCollision, Coordinates } from './map';
 
 let pit = document.getElementById('snake-pit') as HTMLElement;
 
@@ -13,11 +13,27 @@ let snake = Snake.Instance;
 snake.Create();
 
 let coordinates: Coordinates = getRandomCoordinates();
-var food = new Food(coordinates);
+while (hasCollision(coordinates, snake.Coordinates)) {
+    coordinates = getRandomCoordinates();
+}
+let food = new Food(coordinates);
 
 setInterval(() => {
     snake.Move();
-}, 1000);
+
+    if (hasCollision(food.Coordinates, snake.Coordinates)) {
+        snake.Grow();
+        food = createFood();
+    }
+}, 50);
+
+function createFood(): Food {
+    let coordinates: Coordinates = getRandomCoordinates();
+    while (hasCollision(coordinates, snake.Coordinates)) {
+        coordinates = getRandomCoordinates();
+    }
+    return new Food(coordinates);
+}
 
 pit.setAttribute('tabindex', '1');
 pit.focus();

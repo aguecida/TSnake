@@ -7,16 +7,30 @@ var snake_1 = __importDefault(require("./snake"));
 var food_1 = __importDefault(require("./food"));
 var drawer_1 = __importDefault(require("./drawer"));
 var compass_1 = require("./compass");
-var types_1 = require("./types");
+var map_1 = require("./map");
 var pit = document.getElementById('snake-pit');
 drawer_1.default.FillCanvas(Constants.canvasColor);
 var snake = snake_1.default.Instance;
 snake.Create();
-var coordinates = types_1.getRandomCoordinates();
+var coordinates = map_1.getRandomCoordinates();
+while (map_1.hasCollision(coordinates, snake.Coordinates)) {
+    coordinates = map_1.getRandomCoordinates();
+}
 var food = new food_1.default(coordinates);
 setInterval(function () {
     snake.Move();
-}, 1000);
+    if (map_1.hasCollision(food.Coordinates, snake.Coordinates)) {
+        snake.Grow();
+        food = createFood();
+    }
+}, 50);
+function createFood() {
+    var coordinates = map_1.getRandomCoordinates();
+    while (map_1.hasCollision(coordinates, snake.Coordinates)) {
+        coordinates = map_1.getRandomCoordinates();
+    }
+    return new food_1.default(coordinates);
+}
 pit.setAttribute('tabindex', '1');
 pit.focus();
 pit.onkeydown = function (e) {

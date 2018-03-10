@@ -1,4 +1,4 @@
-import { Coordinates } from "./types";
+import { Coordinates } from "./map";
 
 export default class Drawer {
     private static canvas: HTMLCanvasElement = document.getElementById('snake-pit') as HTMLCanvasElement;

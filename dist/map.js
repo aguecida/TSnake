@@ -12,4 +12,4 @@ function hasCollision(newElement, existingElements) {
     });
 }
 exports.hasCollision = hasCollision;
-//# sourceMappingURL=types.js.map
+//# sourceMappingURL=map.js.map

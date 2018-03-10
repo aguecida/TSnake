@@ -1,4 +1,4 @@
-import { Coordinates } from './types';
+import { Coordinates } from './map';
 import Drawer from './drawer';
 import { Direction, isOppositeDirection } from './compass';
 

@@ -6,3 +6,9 @@ export function getRandomCoordinates(): Coordinates {
 
     return { x, y };
 }
+
+export function hasCollision(newElement: Coordinates, existingElements: Array<Coordinates>) {
+    return existingElements.some(element => {
+        return element.x === newElement.x && element.y === newElement.y;
+    });
+}

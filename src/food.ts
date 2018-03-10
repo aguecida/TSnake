@@ -1,5 +1,5 @@
 import Drawer from "./drawer";
-import { Coordinates } from "./types";
+import { Coordinates } from "./map";
 
 export default class Food {
     private color: string = '#e85a5a';
