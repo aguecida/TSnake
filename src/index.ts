@@ -1,39 +1,34 @@
+import { Direction } from './compass';
+import { getRandomCoordinates, hasCollision, Coordinates } from './map';
 import Snake from './snake';
 import Food from './food';
 import Drawer from './drawer';
-import { Direction } from './compass';
-import { getRandomCoordinates, hasCollision, Coordinates } from './map';
+import * as Constants from './constants';
 
 let pit = document.getElementById('snake-pit') as HTMLElement;
 
+const height = new Number(Constants.canvasHeight);
+pit.setAttribute('height', height.toString());
+
+const width = new Number(Constants.canvasWidth);
+pit.setAttribute('width', width.toString());
+
 Drawer.FillCanvas(Constants.canvasColor);
 
-let snake = Snake.Instance;
-
+const snake = Snake.Instance;
 snake.Create();
 
-let coordinates: Coordinates = getRandomCoordinates();
-while (hasCollision(coordinates, snake.Coordinates)) {
-    coordinates = getRandomCoordinates();
-}
-let food = new Food(coordinates);
+
+let food = new Food();
 
 setInterval(() => {
     snake.Move();
 
     if (hasCollision(food.Coordinates, snake.Coordinates)) {
         snake.Grow();
-        food = createFood();
+        food = new Food();
     }
 }, 50);
-
-function createFood(): Food {
-    let coordinates: Coordinates = getRandomCoordinates();
-    while (hasCollision(coordinates, snake.Coordinates)) {
-        coordinates = getRandomCoordinates();
-    }
-    return new Food(coordinates);
-}
 
 pit.setAttribute('tabindex', '1');
 pit.focus();

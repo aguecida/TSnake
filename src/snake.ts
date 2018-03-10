@@ -1,6 +1,7 @@
 import { Coordinates } from './map';
-import Drawer from './drawer';
 import { Direction, isOppositeDirection } from './compass';
+import Drawer from './drawer';
+import * as Constants from './constants';
 
 export default class Snake {
     private static _instance: Snake;

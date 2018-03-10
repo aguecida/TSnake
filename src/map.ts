@@ -1,3 +1,5 @@
+import * as Constants from './constants';
+
 export type Coordinates = { x: number, y: number };
 
 export function getRandomCoordinates(): Coordinates {

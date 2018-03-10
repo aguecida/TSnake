@@ -1,10 +1,8 @@
 "use strict";
-var Constants;
-(function (Constants) {
-    Constants.blockSize = 10;
-    Constants.fps = 50;
-    Constants.canvasColor = '#555';
-    Constants.canvasHeight = 400;
-    Constants.canvasWidth = 600;
-})(Constants || (Constants = {}));
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.blockSize = 10;
+exports.fps = 50;
+exports.canvasColor = '#555';
+exports.canvasHeight = 400;
+exports.canvasWidth = 600;
 //# sourceMappingURL=constants.js.map
