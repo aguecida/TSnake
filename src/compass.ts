@@ -16,6 +16,6 @@ export function isOppositeDirection(currentDirection: Direction, newDirection: D
         case Direction.Right:
             return newDirection === Direction.Left;
         default:
-            return false;
+            throw new Error('Invalid input directions');
     }
 }

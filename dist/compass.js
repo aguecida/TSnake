@@ -22,4 +22,4 @@ function isOppositeDirection(currentDirection, newDirection) {
     }
 }
 exports.isOppositeDirection = isOppositeDirection;
-//# sourceMappingURL=direction.js.map
+//# sourceMappingURL=compass.js.map

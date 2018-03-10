@@ -1,16 +1,20 @@
 import { Coordinates } from './types';
 import { Drawer } from './drawer';
-import { Direction, isOppositeDirection } from './direction';
+import { Direction, isOppositeDirection } from './compass';
 
 export class Snake {
     private static _instance: Snake;
-    private color: string = '#6fda6f';
-    private length: number = 3;
     private coordinates: Array<Coordinates> = [];
+    private color: string = '#6fda6f';
+    private initialLength: number = 3;
     private startingPosition: Coordinates = { x: Constants.canvasWidth / 2, y: Constants.canvasHeight / 2 };
     private direction: Direction = Direction.Up;
 
     private constructor() { }
+
+    get Coordinates(): Array<Coordinates> {
+        return this.coordinates;
+    }
 
     static get Instance(): Snake {
         return this._instance || (this._instance = new Snake());
@@ -18,7 +22,7 @@ export class Snake {
 
     Create(): void {
         this.coordinates = [];
-        for (let i = 0; i < this.length; i++) {
+        for (let i = 0; i < this.initialLength; i++) {
             let newElement: Coordinates = { x: this.startingPosition.x, y: this.startingPosition.y + i * Constants.blockSize };
             this.coordinates.push(newElement);
             Drawer.DrawSquare(newElement, this.color);
@@ -48,7 +52,25 @@ export class Snake {
     }
 
     Grow(): void {
-        this.length += 1;
+        let tail: Coordinates = this.coordinates[this.coordinates.length - 1];
+        let prev: Coordinates = this.coordinates[this.coordinates.length - 2];
+        let newTail: Coordinates;
+
+        if (tail.x > prev.x) {
+            newTail = { x: tail.x + Constants.blockSize, y: tail.y };
+        }
+        else if (tail.x < prev.x) {
+            newTail = { x: tail.x - Constants.blockSize, y: tail.y };
+        }
+        else if (tail.y > prev.y) {
+            newTail = { x: tail.x, y: tail.y + Constants.blockSize };
+        }
+        else {
+            newTail = { x: tail.x, y: tail.y - Constants.blockSize };
+        }
+
+        this.coordinates.push(newTail);
+        Drawer.DrawSquare(newTail, this.color);
     }
 
     ChangeDirection(newDirection: Direction): void {

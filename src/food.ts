@@ -2,10 +2,11 @@ import { Drawer } from "./drawer";
 import { Coordinates } from "./types";
 
 export class Food {
-    color: string = '#e85a5a';
+    private color: string = '#e85a5a';
+    private coordinates: Coordinates;
 
-    Create() {
-        let coordinates: Coordinates = { x: 10, y: 10 };
-        Drawer.DrawSquare(coordinates, this.color);
+    constructor() {
+        this.coordinates = { x: 10, y: 10 };
+        Drawer.DrawSquare(this.coordinates, this.color);
     }
 }
