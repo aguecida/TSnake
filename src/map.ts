@@ -16,5 +16,5 @@ export function hasCollision(newElement: Coordinates, existingElements: Array<Co
 }
 
 export function outOfBounds({ x, y }: Coordinates): boolean {
-    return x > Constants.canvasWidth || x < 0 || y > Constants.canvasHeight || y < 0;
+    return x >= Constants.canvasWidth || x < 0 || y >= Constants.canvasHeight || y < 0;
 }

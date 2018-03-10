@@ -32,6 +32,7 @@ function start() {
             drawer_1.default.FillCanvas(Constants.canvasColor);
             clearInterval(interval);
             gameOver = true;
+            return;
         }
         if (map_1.hasCollision(food.Coordinates, snake.Body)) {
             ScoreCard.incrementScore();

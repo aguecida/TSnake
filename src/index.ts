@@ -25,6 +25,7 @@ function start() {
             Drawer.FillCanvas(Constants.canvasColor);
             clearInterval(interval);
             gameOver = true;
+            return;
         }
     
         if (hasCollision(food.Coordinates, snake.Body)) {

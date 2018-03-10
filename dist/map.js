@@ -22,7 +22,7 @@ function hasCollision(newElement, existingElements) {
 exports.hasCollision = hasCollision;
 function outOfBounds(_a) {
     var x = _a.x, y = _a.y;
-    return x > Constants.canvasWidth || x < 0 || y > Constants.canvasHeight || y < 0;
+    return x >= Constants.canvasWidth || x < 0 || y >= Constants.canvasHeight || y < 0;
 }
 exports.outOfBounds = outOfBounds;
 //# sourceMappingURL=map.js.map
