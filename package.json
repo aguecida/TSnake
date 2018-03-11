@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run tsc:w\" \"npm run lite\" ",
+    "dev": "concurrently \"npm run tsc:w\" \"npm run lite\" ",
+    "build": "tsc",
+    "start": "npm run lite",
     "tsc:w": "tsc -w",
     "lite": "lite-server"
   },
