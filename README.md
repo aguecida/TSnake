@@ -5,4 +5,4 @@
 * Install [Node JS](https://nodejs.org)
 * Navigate to the root directory in a command shell
   * Run `npm install` to install dependencies
-  * Run `npm start` to build and start the application in watch mode
+  * Run `npm run build` to build the application followed by `npm start` to run the application
