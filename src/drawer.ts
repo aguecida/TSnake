@@ -1,4 +1,4 @@
-import { Coordinates } from "./map";
+import { coordinates } from "./map";
 import * as Constants from './constants';
 
 export default class Drawer {
@@ -13,7 +13,7 @@ export default class Drawer {
         }
     }
 
-    static DrawSquare({ x, y }: Coordinates, color: string): void {
+    static DrawSquare({ x, y }: coordinates, color: string): void {
         Drawer.context.fillStyle = color;
         Drawer.context.fillRect(x, y, Constants.blockSize, Constants.blockSize);
     }

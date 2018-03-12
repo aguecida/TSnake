@@ -1,19 +1,19 @@
 let topScore: number = 0;
 let currentScore: number = 0;
-const points: number = 10;
+const pointIncrements: number = 10;
 
-export function newGame() {
+export function newGame(): void {
     currentScore = 0;
     printScores();
 }
 
 export function incrementScore(): void {
-    currentScore += points;
+    currentScore += pointIncrements;
     if (currentScore > topScore) topScore = currentScore;
     printScores();
 }
 
-function printScores() {
+function printScores(): void {
     let currentScoreElement = document.getElementById("current-score") as HTMLElement;
     currentScoreElement.innerText = `Current Score: ${currentScore}`;
 

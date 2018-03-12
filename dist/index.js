@@ -20,7 +20,35 @@ var ScoreCard = __importStar(require("./scorecard"));
 var snake = snake_1.default.Instance;
 var food;
 var gameOver = true;
-initializeBoard();
+ScoreCard.newGame();
+var pit = document.getElementById('snake-pit');
+var height = new Number(Constants.canvasHeight);
+pit.setAttribute('height', height.toString());
+var width = new Number(Constants.canvasWidth);
+pit.setAttribute('width', width.toString());
+pit.setAttribute('tabindex', '1');
+pit.focus();
+drawer_1.default.FillCanvas(Constants.canvasColor);
+pit.onkeydown = function (e) {
+    if (gameOver) {
+        start();
+        return;
+    }
+    switch (e.keyCode) {
+        case compass_1.Direction.Up:
+            snake.ChangeDirection(compass_1.Direction.Up);
+            break;
+        case compass_1.Direction.Down:
+            snake.ChangeDirection(compass_1.Direction.Down);
+            break;
+        case compass_1.Direction.Left:
+            snake.ChangeDirection(compass_1.Direction.Left);
+            break;
+        case compass_1.Direction.Right:
+            snake.ChangeDirection(compass_1.Direction.Right);
+            break;
+    }
+};
 function start() {
     gameOver = false;
     ScoreCard.newGame();
@@ -40,36 +68,5 @@ function start() {
             food = new food_1.default();
         }
     }, 50);
-}
-function initializeBoard() {
-    ScoreCard.newGame();
-    var pit = document.getElementById('snake-pit');
-    var height = new Number(Constants.canvasHeight);
-    pit.setAttribute('height', height.toString());
-    var width = new Number(Constants.canvasWidth);
-    pit.setAttribute('width', width.toString());
-    pit.setAttribute('tabindex', '1');
-    pit.focus();
-    pit.onkeydown = function (e) {
-        if (gameOver) {
-            start();
-            return;
-        }
-        switch (e.keyCode) {
-            case compass_1.Direction.Up:
-                snake.ChangeDirection(compass_1.Direction.Up);
-                break;
-            case compass_1.Direction.Down:
-                snake.ChangeDirection(compass_1.Direction.Down);
-                break;
-            case compass_1.Direction.Left:
-                snake.ChangeDirection(compass_1.Direction.Left);
-                break;
-            case compass_1.Direction.Right:
-                snake.ChangeDirection(compass_1.Direction.Right);
-                break;
-        }
-    };
-    drawer_1.default.FillCanvas(Constants.canvasColor);
 }
 //# sourceMappingURL=index.js.map

@@ -2,14 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var topScore = 0;
 var currentScore = 0;
-var points = 10;
+var pointIncrements = 10;
 function newGame() {
     currentScore = 0;
     printScores();
 }
 exports.newGame = newGame;
 function incrementScore() {
-    currentScore += points;
+    currentScore += pointIncrements;
     if (currentScore > topScore)
         topScore = currentScore;
     printScores();

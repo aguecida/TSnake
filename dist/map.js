@@ -25,4 +25,8 @@ function outOfBounds(_a) {
     return x >= Constants.canvasWidth || x < 0 || y >= Constants.canvasHeight || y < 0;
 }
 exports.outOfBounds = outOfBounds;
+function getCenterCoordinates() {
+    return { x: Constants.canvasWidth / 2, y: Constants.canvasHeight / 2 };
+}
+exports.getCenterCoordinates = getCenterCoordinates;
 //# sourceMappingURL=map.js.map

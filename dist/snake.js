@@ -10,6 +10,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+var map_1 = require("./map");
 var compass_1 = require("./compass");
 var drawer_1 = __importDefault(require("./drawer"));
 var Constants = __importStar(require("./constants"));
@@ -18,7 +19,7 @@ var Snake = /** @class */ (function () {
         this.body = [];
         this.color = '#6fda6f';
         this.initialLength = 3;
-        this.startingPosition = { x: Constants.canvasWidth / 2, y: Constants.canvasHeight / 2 };
+        this.startingPosition = map_1.getCenterCoordinates();
         this.direction = compass_1.Direction.Up;
         this.directionQueue = [];
     }
