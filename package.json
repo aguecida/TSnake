@@ -22,11 +22,11 @@
   },
   "homepage": "https://github.com/aguecida/TSnake#readme",
   "dependencies": {
-    "systemjs": "^0.21.0",
-    "typescript": "^2.7.2"
+    "systemjs": "^0.21.0"
   },
   "devDependencies": {
     "concurrently": "^3.5.1",
-    "lite-server": "^2.3.0"
+    "lite-server": "^2.3.0",
+    "typescript": "^2.7.2"
   }
 }
