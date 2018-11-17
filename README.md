@@ -4,7 +4,7 @@
 
 https://enigmatic-thicket-26523.herokuapp.com/
 
-## Setup
+## Development
 
 * Install [Node.js](https://nodejs.org)
 * Navigate to the root directory in a command shell
